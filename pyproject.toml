@@ -2,10 +2,10 @@
 name = "astro-cue"
 description = "Nebular Emission Modeling"
 authors = [
-    { name="Yijia Li", email="yijia.li@psu.edu" },
+    { name = "Yijia Li", email = "yijia.li@northwestern.edu" },
 ]
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8,<3.13"
 license = { text = "MIT License" }
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -16,14 +16,28 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Astronomy"
 ]
 dynamic = ["version"]
-dependencies = ["numpy", "scikit-learn", "scipy", "tensorflow", "dill", "tqdm"] #"pickle"
+dependencies = [
+    "scikit-learn",
+    "scipy",
+    "dill",
+    "tqdm",
+
+    # Older tested TensorFlow stack
+    "tensorflow>=2.10,<2.12; python_version < '3.11'",
+    "protobuf>=3.19,<3.20; python_version < '3.11'",
+    "numpy>=1.21,<2; python_version < '3.11'",
+
+    # Newer Python / newer TensorFlow stack
+    "tensorflow>=2.18; python_version >= '3.11'",
+    "protobuf>=3.20.3; python_version >= '3.11'",
+    "numpy>=1.26; python_version >= '3.11'",
+]
 
 [project.optional-dependencies]
 test = ["pytest", "pytest-xdist"]
 
 
 [tool.setuptools]
-#packages = ["src.cue",]
 include-package-data = true
 
 [tool.setuptools.packages.find]
